@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'OdontoFlow CRM',
-  description: 'CRM de WhatsApp para clínica odontológica com integração n8n',
+  title: 'Facciale Odontologia Avançada | CRM',
+  description: 'CRM de atendimento e WhatsApp da Facciale Odontologia Avançada',
 };
 
 export default function RootLayout({ children }) {
