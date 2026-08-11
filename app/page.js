@@ -40,7 +40,7 @@ const appointmentsSeed = [
 ];
 
 const stageNames = ['Novo lead', 'Contato iniciado', 'Qualificado', 'Consulta marcada', 'Orçamento', 'Tratamento', 'Finalizado'];
-const stageAccent = { 'Novo lead':'#1696d2', 'Contato iniciado':'#f2a12c', 'Qualificado':'#2279c9', 'Consulta marcada':'#19a974', 'Orçamento':'#7067d8', 'Tratamento':'#0d8fa8', 'Finalizado':'#708090' };
+const stageAccent = { 'Novo lead':'#1696d2', 'Contato iniciado':'#f2a12c', 'Qualificado':'#2279c9', 'Consulta marcada':'#19a974', 'Orçamento':'#2d83c5', 'Tratamento':'#0d8fa8', 'Finalizado':'#708090' };
 const interests = ['Avaliação', 'Clareamento', 'Implante', 'Ortodontia', 'Limpeza', 'Prótese', 'Facetas', 'Endodontia', 'Odontopediatria', 'Outro'];
 const sources = ['WhatsApp', 'Instagram', 'Google', 'Facebook', 'Site', 'Indicação', 'Outro'];
 const professionals = ['Dra. Ana Ribeiro', 'Dr. Paulo Mendes', 'Dra. Beatriz Lima'];
@@ -78,7 +78,7 @@ function Icon({ name, size = 18 }) {
 }
 
 function Login({ onLogin }) {
-  const [email, setEmail] = useState('admin@clinica.com');
+  const [email, setEmail] = useState('admin@facciale.com.br');
   const [password, setPassword] = useState('123456');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -110,7 +110,7 @@ function Login({ onLogin }) {
     </section>
 
     <section className="loginPanel">
-      <form className="loginCard premiumCard" onSubmit={(e)=>{e.preventDefault(); localStorage.setItem('odonto_crm_session','1'); onLogin();}}>
+      <form className="loginCard premiumCard" onSubmit={(e)=>{e.preventDefault(); localStorage.setItem('facciale_crm_session','1'); onLogin();}}>
         <div className="mobileLoginBrand"><div className="loginLogoMark"><span className="toothGlyph">✦</span></div><div><strong>Facciale</strong><small>Odontologia Avançada</small></div></div>
         <div className="loginFormIntro"><div className="loginMiniIcon"><Icon name="user" size={18}/></div><div className="eyebrow">ÁREA RESTRITA</div><h2>Bem-vindo de volta</h2><p>Acesse a central de atendimento da Facciale Odontologia Avançada.</p></div>
         <div className="loginFieldGroup"><label htmlFor="login-email">E-mail</label><div className="loginInputWrap"><span className="inputIcon">@</span><input id="login-email" value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="seuemail@clinica.com" required /></div></div>
@@ -219,7 +219,7 @@ function AppShell() {
   const [appointmentModal,setAppointmentModal]=useState({open:false,appointment:null,patientId:null});
 
   useEffect(()=>{
-    setAuthenticated(localStorage.getItem('odonto_crm_session') === '1');
+    setAuthenticated(localStorage.getItem('facciale_crm_session') === '1' || localStorage.getItem('odonto_crm_session') === '1');
     try {
       const storedPatients=localStorage.getItem('odonto_crm_patients');
       const storedAppointments=localStorage.getItem('odonto_crm_appointments');
@@ -280,7 +280,7 @@ function AppShell() {
       <div className="sidebarBrand"><div className="brandMark">FA</div><div><b>Facciale</b><small>Odontologia Avançada</small></div><button className="closeMobile" onClick={()=>setMobileNav(false)}><Icon name="x"/></button></div>
       <div className="clinicMini"><div className="clinicAvatar">FA</div><div><b>{clinicName}</b><small>Unidade principal</small></div></div>
       <nav>{nav.map(([id,icon,label])=><button key={id} className={page===id?'active':''} onClick={()=>{setPage(id);setMobileNav(false)}}><Icon name={icon}/><span>{label}</span>{id==='inbox' && <i>3</i>}</button>)}</nav>
-      <div className="sidebarBottom"><div className="statusOnline"><span></span> WhatsApp conectado</div><div className="userMini"><div className="avatarSmall">CM</div><div><b>Camila Martins</b><small>Administradora</small></div><button title="Sair" onClick={()=>{localStorage.removeItem('odonto_crm_session');setAuthenticated(false)}}><Icon name="logout" size={17}/></button></div></div>
+      <div className="sidebarBottom"><div className="statusOnline"><span></span> WhatsApp conectado</div><div className="userMini"><div className="avatarSmall">CM</div><div><b>Camila Martins</b><small>Administradora</small></div><button title="Sair" onClick={()=>{localStorage.removeItem('facciale_crm_session');setAuthenticated(false)}}><Icon name="logout" size={17}/></button></div></div>
     </aside>
     <main className="main">
       <header className="topbar"><button className="menuMobile" onClick={()=>setMobileNav(true)}><Icon name="menu"/></button><div className="topSearch"><Icon name="search" size={17}/><input placeholder="Buscar paciente, telefone..." /></div><div className="topActions"><button className="topQuickBtn" onClick={()=>openNewPatient()}><Icon name="plus" size={15}/> Paciente</button><span className="livePill"><i></i> IA ativa</span><div className="avatarSmall">CM</div></div></header>
